@@ -3,10 +3,21 @@ import { expect, type Locator, type Page } from '@playwright/test';
 export class LoginPage {
   readonly page: Page;
 
+  //Locators
+  readonly logo: Locator;
+  readonly emailLabel: Locator;
+  readonly passwordLabel: Locator;
+  readonly forgotPasswordLink: Locator;
+  readonly licenseText: Locator;
+
 
   constructor(page: Page) {
     this.page = page;
-
+    this.logo = page.locator('.MuiBox-root > div > .MuiBox-root').first();
+    this.emailLabel = page.locator('body');
+    this.passwordLabel = page.locator('body');
+    this.forgotPasswordLink = page.locator('body');
+    this.licenseText = page.locator('body');
   }
 
   async goto() {
@@ -18,16 +29,18 @@ export class LoginPage {
   }
 
   async verifyLoginPageVisible() {
-    await expect(this.page.locator('.MuiBox-root > div > .MuiBox-root').first()).toBeVisible();
+    await expect(this.logo).toBeVisible();
     await expect(this.page.getByRole('heading').filter({ hasText: 'Sign In' })).toContainText('Sign In to Maltego');
-    await expect(this.page.locator('body')).toContainText('E-Mail *');
-    await expect(this.page.locator('body')).toContainText('Password *');
+    await expect(this.emailLabel).toContainText('E-Mail *');
+    await expect(this.passwordLabel).toContainText('Password *');
+
     await expect(this.page.getByRole('button', { name: 'Sign in to Maltego' })).toBeVisible();
     await expect(this.page.getByRole('button')).toContainText('Sign in to Maltego');
     await expect(this.page.getByRole('link', { name: 'Forgot Password?' })).toBeVisible();
-    await expect(this.page.locator('body')).toContainText('Forgot Password?');
+    await expect(this.forgotPasswordLink).toContainText('Forgot Password?');;
+
     await expect(this.page.getByText('© Maltego Technologies・ISO')).toBeVisible();
-    await expect(this.page.locator('body')).toContainText('© Maltego Technologies・ISO 27001:2022 Certified');
+    await expect(this.licenseText).toContainText('© Maltego Technologies・ISO 27001:2022 Certified');
   }
 
   async login(email: string, password: string) {
