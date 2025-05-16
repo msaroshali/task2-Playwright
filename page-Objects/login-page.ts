@@ -9,6 +9,7 @@ export class LoginPage {
   readonly passwordLabel: Locator;
   readonly forgotPasswordLink: Locator;
   readonly licenseText: Locator;
+  readonly loginError: Locator;
 
 
   constructor(page: Page) {
@@ -18,6 +19,7 @@ export class LoginPage {
     this.passwordLabel = page.locator('body');
     this.forgotPasswordLink = page.locator('body');
     this.licenseText = page.locator('body');
+    this.loginError = page.locator('body');
   }
 
   async goto() {
@@ -58,5 +60,21 @@ export class LoginPage {
     ]);
   }
 
+  async loginInvalid(email: string, password: string) {
+    await expect(this.page.getByRole('textbox', { name: 'E-Mail' })).toBeEmpty();
+    await expect(this.page.getByRole('textbox', { name: 'password' })).toBeEmpty();
+    await this.page.getByRole('textbox', { name: 'E-Mail' }).click();
+    await this.page.getByRole('textbox', { name: 'E-Mail' }).fill(email);
+    await this.page.getByRole('textbox', { name: 'Password' }).click();
+    await this.page.getByRole('textbox', { name: 'Password' }).fill(password);
+    this.page.getByRole('button', { name: 'Sign in to Maltego' }).click();
+
+  }
+
+  async verifyLoginErrorMessage() {
+
+    await expect(this.page.getByText('Incorrect credentials. Please')).toBeVisible();
+    await expect(this.loginError).toContainText('Incorrect credentials. Please double check your email and password. Alternatively, you can reset your password.');
+  }
 
 }
