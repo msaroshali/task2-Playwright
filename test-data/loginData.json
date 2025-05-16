@@ -1,0 +1,13 @@
+{
+    "validUser": 
+    {
+        "email": "muhammad-sarosh.ali@tu-ilmenau.de",
+        "password": "#qBj7ab#37LJEUW"
+    },
+    "invalidUser": 
+    {
+        "email": "email@example.com",
+        "password": "password"
+    }
+
+}
