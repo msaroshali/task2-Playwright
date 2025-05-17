@@ -55,6 +55,16 @@ export class LoginPage {
     ]);
   }
 
+  async loginDuringSignUp(password: string) {
+    await this.page.getByRole('textbox', { name: 'Password' }).click({ timeout: 20000 });
+    await this.page.getByRole('textbox', { name: 'Password' }).fill(password);
+    await Promise.all([
+      this.page.waitForURL('https://app.maltego.com/**', { timeout: 20000 }),
+      this.page.getByRole('button', { name: 'Sign in' }).click(),
+    ]);
+  }
+  
+
   async loginInvalid(email: string, password: string) {
     await expect(this.page.getByRole('textbox', { name: 'E-Mail' })).toBeEmpty();
     await expect(this.page.getByRole('textbox', { name: 'password' })).toBeEmpty();
@@ -65,7 +75,7 @@ export class LoginPage {
     this.page.getByRole('button', { name: 'Sign in to Maltego' }).click();
 
   }
-
+  
   async verifyLoginErrorMessage() {
     await expect(this.page.getByText('Incorrect credentials. Please')).toBeVisible();
     await expect(this.loginError).toContainText('Incorrect credentials. Please double check your email and password. Alternatively, you can reset your password.');
