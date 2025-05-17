@@ -23,7 +23,6 @@ test('valid login', async ({ page }) => {
 // Test for an invalid login
 test('invalid login', async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const homepage = new HomePage(page);
 
   // Navigate to the login page and get started
   await loginPage.goto();
