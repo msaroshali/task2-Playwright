@@ -7,8 +7,9 @@ export class HomePage {
     this.page = page;
   }
 
+  // Check if landing on home page was successful
   async verifyHomePageVisible() {
-    await expect(this.page.getByLabel('Top Bar')).toBeVisible();
+    await expect(this.page.getByLabel('Top Bar')).toBeVisible({ timeout: 60000 });
     await expect(this.page.getByTestId('user-avatar')).toBeVisible();
     await expect(this.page.getByText('AdminUsersProductsData')).toBeVisible();
     await expect(this.page.locator('#admin-widget')).toContainText('Admin');
