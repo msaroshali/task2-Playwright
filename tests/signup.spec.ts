@@ -17,8 +17,8 @@ test('Sign Up', async ({ page }) => {
   const emailAddress = mailosaur.servers.generateEmailAddress(signUpData.serverID);
 
   // Navigate to the login page and get started
-   await loginPage.goto();
-   await loginPage.acceptCookies();
+  await loginPage.goto();
+  await loginPage.acceptCookies();
 
   // Verify the login page 
   await loginPage.verifyLoginPageVisible();
@@ -41,17 +41,15 @@ test('Sign Up', async ({ page }) => {
   const code = (message.html.codes[0]);
 
   // verification of email with the verifiation code
-  signup.emailVerification(code.value.toString());
+  await signup.emailVerification(code.value.toString());
 
   // Try to login with the new account
-  signup.loginWithNewAccount(emailAddress, signUpData.password);
+  await signup.loginWithNewAccount(emailAddress, signUpData.password);
 
   // Complete the Profile 
-  signup.comlpleteProfile(signUpData.phone, signUpData.orgName, signUpData.role);
+  await signup.comlpleteProfile(signUpData.phone, signUpData.orgName, signUpData.role);
     
-  await expect(page.getByText('We use cookies to personalise')).toBeVisible();
-  await page.getByRole('link', { name: 'Yes' }).click({ timeout: 60000 });
-    
+
   // Verify successful home page landing 
   await homepage.verifyHomePageVisible();
 });
