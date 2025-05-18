@@ -4,8 +4,6 @@ import { HomePage } from '../page-Objects/home-page';
 import { PasswordResetPage } from '../page-Objects/reset-pass';
 import passwordResetData from '../test-data/passwordResetData.json';
 
-
-
 // The test below is for the password reset process, for an account 
 // that already pre-exists. No new acounts are created.
 
@@ -43,7 +41,7 @@ test('login to an existing account and change password ', async ({ page }) => {
     await passwordResetPage.verifyPageAndResetPassword(passwordResetData.originalPass);
       
     // Verify the password reset was successful
-    await passwordResetPage.verifyPasswordReset();
+    await passwordResetPage.verifyChangeAndSignOut();
 });
 
 

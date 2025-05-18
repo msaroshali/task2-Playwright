@@ -6,7 +6,8 @@ import signUpData from '../test-data/signUpData.json';
 
 const MailosaurClient = require("mailosaur");
 
-// Test for a valid login
+// Test for signing up for an account
+
 test('Sign Up', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const homepage = new HomePage(page);
