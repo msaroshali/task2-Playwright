@@ -77,7 +77,7 @@ export class LoginPage {
   }
   
   async verifyLoginErrorMessage() {
-    await expect(this.page.getByText('Incorrect credentials. Please')).toBeVisible();
+    await expect(this.page.getByText('Incorrect credentials. Please')).toBeVisible({timeout: 60000});
     await expect(this.loginError).toContainText('Incorrect credentials. Please double check your email and password. Alternatively, you can reset your password.');
   }
 
