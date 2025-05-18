@@ -3,6 +3,9 @@ import { LoginPage } from '../page-Objects/login-page';
 import { HomePage } from '../page-Objects/home-page';
 import loginData from '../test-data/loginData.json';
 
+
+//Tests for performing login operations with valid and invalid credentials
+
 // Test for a valid login
 test('valid login', async ({ page }) => {
   const loginPage = new LoginPage(page);

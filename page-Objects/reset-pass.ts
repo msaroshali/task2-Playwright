@@ -28,9 +28,10 @@ export class PasswordResetPage {
     await this.page.locator('form').filter({ hasText: 'Password *Save' }).getByRole('button').click();
   }
 
-  /// This method verifies the reset and logs out of the account
+  // This method verifies the reset and logs out of the account
   async verifyPasswordReset() {
     await expect(this.page.getByLabel('Your changes have been saved')).toContainText('Your changes have been saved and will be reflected upon your next login.');
+    await this.page.getByRole('button', { name: 'OK' }).click();
     await expect(this.page.getByRole('button', { name: 'Back to Maltego' })).toBeVisible();
     await this.page.getByRole('button', { name: 'Back to Maltego' }).click();
 
@@ -39,4 +40,15 @@ export class PasswordResetPage {
     await this.page.getByText('Logout').click();
   }
 
+  // sign out from the account
+  async verifyChangeAndSignOut() {
+    await expect(this.page.getByLabel('Your changes have been saved')).toContainText('Your changes have been saved and will be reflected upon your next login.');
+    await this.page.getByRole('button', { name: 'OK' }).click();
+    await expect(this.page.getByText('Prefer to use a different')).toBeVisible();
+    await this.page.getByRole('link', { name: 'Logout' }).click();
+    await this.page.getByTestId('user-avatar').click();
+    await this.page.getByRole('menuitem', { name: 'Logout' }).click();
+    await expect(this.page.getByRole('heading')).toContainText('Sign In to Maltego');
+    await expect(this.page.getByRole('heading')).toContainText('Sign In to Maltego');
+  }
 }
