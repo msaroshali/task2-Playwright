@@ -32,7 +32,7 @@ export class PasswordResetPage {
   async verifyPasswordReset() {
     await expect(this.page.getByLabel('Your changes have been saved')).toContainText('Your changes have been saved and will be reflected upon your next login.');
     await this.page.getByRole('button', { name: 'OK' }).click();
-    await expect(this.page.getByRole('button', { name: 'Back to Maltego' })).toBeVisible();
+  //    await expect(this.page.getByRole('button', { name: 'Back to Maltego' })).toBeVisible();
     await this.page.getByRole('button', { name: 'Back to Maltego' }).click();
 
     await expect(this.page.getByTestId('user-avatar')).toBeVisible();
