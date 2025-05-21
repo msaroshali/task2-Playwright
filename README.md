@@ -16,7 +16,7 @@ The following user workflows are tested:
 
 - **Password Reset**  
   The test flow for password reset includes:
-  1. Logging in with the original password
+  1. Logging in to an existing account with the original password
   2. Resetting the password to a new one
   3. Logging in with the new password
   4. Resetting the password back to the original
