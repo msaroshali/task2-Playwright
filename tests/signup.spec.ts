@@ -3,6 +3,8 @@ import { LoginPage } from '../page-Objects/login-page';
 import { HomePage } from '../page-Objects/home-page';
 import { SignUpPage } from '../page-Objects/signup-page';
 import signUpData from '../test-data/signUpData.json';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const MailosaurClient = require("mailosaur");
 
@@ -12,10 +14,13 @@ test('Sign Up', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const homepage = new HomePage(page);
   const signup = new SignUpPage(page);
+  const apiKey = process.env.signup_APIkey || '';
+  const serverID = process.env.signup_serverID || '';
+  const password = process.env.signup_password || '';
 
   // Initializing the Mailosaur client with API key establishing Mailosaur Email address
-  const mailosaur = new MailosaurClient(signUpData.apiKey);
-  const emailAddress = mailosaur.servers.generateEmailAddress(signUpData.serverID);
+  const mailosaur = new MailosaurClient(apiKey);
+  const emailAddress = mailosaur.servers.generateEmailAddress(serverID);
 
   // Navigate to the login page and get started
   await loginPage.goto();
@@ -33,10 +38,10 @@ test('Sign Up', async ({ page }) => {
   await signup.verifySignUpPageVisible();
 
   // Fill in the sign up details
-  await signup.fillSignUpDetails(emailAddress, signUpData.firstName, signUpData.lastName, signUpData.password);
+  await signup.fillSignUpDetails(emailAddress, signUpData.firstName, signUpData.lastName, password);
 
   // Mailosaur api call to retrieve verification code 
-  const message = await mailosaur.messages.get(signUpData.serverID, {
+  const message = await mailosaur.messages.get(serverID, {
     sentTo: emailAddress,
   });
   const code = (message.html.codes[0]);
@@ -45,7 +50,7 @@ test('Sign Up', async ({ page }) => {
   await signup.emailVerification(code.value.toString());
 
   // Try to login with the new account
-  await signup.loginWithNewAccount(emailAddress, signUpData.password);
+  await signup.loginWithNewAccount(emailAddress, password);
 
   // Complete the Profile 
   await signup.comlpleteProfile(signUpData.phone, signUpData.orgName, signUpData.role);
