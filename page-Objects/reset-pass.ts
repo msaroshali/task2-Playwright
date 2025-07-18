@@ -48,7 +48,7 @@ export class PasswordResetPage {
     await this.page.getByRole('link', { name: 'Logout' }).click();
     await this.page.getByTestId('user-avatar').click();
     await this.page.getByRole('menuitem', { name: 'Logout' }).click();
-    await expect(this.page.getByRole('heading')).toContainText('Sign In to Maltego');
-    await expect(this.page.getByRole('heading')).toContainText('Sign In to Maltego');
+    await expect(this.page.getByRole('heading')).toContainText('Login to Maltego');
+    await expect(this.page.getByRole('heading')).toContainText('Login to Maltego');
   }
 }

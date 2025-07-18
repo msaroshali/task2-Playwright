@@ -1,9 +1,4 @@
 {
-    "validUser": 
-    {
-        "email": "46yev@fonaxbxp.mailosaur.net",
-        "password": "Malteg22O@$f2"
-    },
     "invalidUser": 
     {
         "email": "email@example.com",

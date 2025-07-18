@@ -31,11 +31,11 @@ export class LoginPage {
 
   async verifyLoginPageVisible() {
     await expect(this.logo).toBeVisible();
-    await expect(this.page.getByRole('heading').filter({ hasText: 'Sign In' })).toContainText('Sign In to Maltego');
+    await expect(this.page.getByRole('heading', { name: 'Login to Maltego' })).toBeVisible();
     await expect(this.emailLabel).toContainText('E-Mail *');
     await expect(this.passwordLabel).toContainText('Password *');
-    await expect(this.page.getByRole('button', { name: 'Sign in to Maltego' })).toBeVisible();
-    await expect(this.page.getByRole('button')).toContainText('Sign in to Maltego');
+    await expect(this.page.getByRole('button', { name: 'Login to Maltego' })).toBeVisible();
+    await expect(this.page.getByRole('button')).toContainText('Login to Maltego');
     await expect(this.page.getByRole('link', { name: 'Forgot Password?' })).toBeVisible();
     await expect(this.forgotPasswordLink).toContainText('Forgot Password?');;
     await expect(this.page.getByText('© Maltego Technologies・ISO')).toBeVisible();
@@ -51,7 +51,7 @@ export class LoginPage {
     await this.page.getByRole('textbox', { name: 'Password' }).fill(password);
     await Promise.all([
       this.page.waitForURL('https://app.maltego.com/**', { timeout: 20000 }),
-      this.page.getByRole('button', { name: 'Sign in to Maltego' }).click(),
+      this.page.getByRole('button', { name: 'Login to Maltego' }).click(),
     ]);
   }
 
@@ -72,7 +72,7 @@ export class LoginPage {
     await this.page.getByRole('textbox', { name: 'E-Mail' }).fill(email);
     await this.page.getByRole('textbox', { name: 'Password' }).click();
     await this.page.getByRole('textbox', { name: 'Password' }).fill(password);
-    this.page.getByRole('button', { name: 'Sign in to Maltego' }).click();
+    this.page.getByRole('button', { name: 'Login to Maltego' }).click();
 
   }
   

@@ -21,6 +21,7 @@
     "@types/node": "^22.15.18"
   },
   "dependencies": {
+    "dotenv": "^17.2.0",
     "mailosaur": "^8.8.1",
     "mailslurp-client": "^15.22.1",
     "task2-playwright": "file:"
